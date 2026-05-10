@@ -6,6 +6,7 @@
     <title>İletişim | Berat Kuran</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body class="bg-light">
 
@@ -22,7 +23,7 @@
         </div>
     </nav>
 
-    <main class="container mt-5">
+    <main class="container mt-5" id="app">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow p-4">
@@ -30,45 +31,24 @@
                     
                     <form id="contactForm" action="islem.php" method="POST">
                         <div class="mb-3">
-                            <label class="form-label font-weight-bold">Ad Soyad:</label>
-                            <input type="text" name="adsoyad" id="adsoyad" class="form-control" placeholder="Adınızı yazınız...">
+                            <label class="form-label">Ad Soyad:</label>
+                            <input type="text" name="adsoyad" id="adsoyad" class="form-control" v-model="formData.ad">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">E-posta Adresi:</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="ornek@sakarya.edu.tr">
+                            <input type="email" name="email" id="email" class="form-control" v-model="formData.email">
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">İletişim Nedeni:</label>
-                            <select name="konu" class="form-select">
-                                <option value="" selected disabled>Seçiniz...</option>
-                                <option value="Oneri">Öneri</option>
-                                <option value="Sikayet">Şikayet</option>
-                                <option value="Soru">Soru</option>
-                            </select>
+                            <label class="form-label">Mesajınız:</label>
+                            <textarea name="mesaj" id="mesaj" class="form-control" rows="3" v-model="formData.mesaj"></textarea>
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label d-block">Cinsiyet:</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="cinsiyet" id="erkek" value="Erkek">
-                                <label class="form-check-label" for="erkek">Erkek</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="cinsiyet" id="kadin" value="Kadın">
-                                <label class="form-check-label" for="kadin">Kadın</label>
-                            </div>
-                        </div>
-
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" name="kvkk" id="kvkk">
-                            <label class="form-check-label" for="kvkk small">KVKK metnini okudum ve onaylıyorum.</label>
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="button" class="btn btn-primary me-2">JS Denetle (Yakında)</button>
-                            <button type="reset" class="btn btn-outline-danger">Formu Temizle</button>
+                        <div class="mt-4 d-flex gap-2">
+                            <button type="button" class="btn btn-primary" onclick="validateNative()">JS ile Denetle & Gönder</button>
+                            
+                            <button type="button" class="btn btn-success" @click="validateVue">Vue.js ile Denetle & Gönder</button>
                         </div>
                     </form>
                 </div>
@@ -76,10 +56,44 @@
         </div>
     </main>
 
-    <footer class="text-center p-4 mt-5 border-top">
-        <p>&copy; 2026 - Berat Kuran</p>
-    </footer>
+    <script>
+        // 1. Native JavaScript Kontrolü 
+        function validateNative() {
+            const ad = document.getElementById('adsoyad').value;
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            if (ad === "" || email === "") {
+                alert("Lütfen tüm alanları doldurunuz! (Native JS Kontrolü)");
+            } else if (!emailRegex.test(email)) {
+                alert("Lütfen geçerli bir e-mail formatı giriniz! (Native JS Kontrolü)");
+            } else {
+                alert("Başarılı! Form PHP sayfasına yönlendiriliyor.");
+                document.getElementById('contactForm').submit();
+            }
+        }
+
+        // 2. Vue.js Kontrolü (Framework) 
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    formData: { ad: '', email: '', mesaj: '' }
+                }
+            },
+            methods: {
+                validateVue() {
+                    if (this.formData.ad === "" || this.formData.email === "") {
+                        alert("Hata: Boş alan bırakamazsınız! (Vue.js Kontrolü)");
+                    } else if (this.formData.ad.length < 3) {
+                        alert("Hata: İsim çok kısa! (Vue.js Kontrolü)");
+                    } else {
+                        alert("Başarılı: Vue.js denetimi geçti. Gönderiliyor...");
+                        document.getElementById('contactForm').submit();
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
 </body>
 </html>
