@@ -18,30 +18,60 @@
     </header>
 
     <!-- Navigasyon Menüsü (Bootstrap) -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
-        <div class="container">
-            <div class="navbar-nav">
-                <a class="nav-link active" href="index.html">Hakkında</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">Berat Kuran</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html">Hakkında</a>
                 <a class="nav-link" href="cv.html">Özgeçmiş</a>
                 <a class="nav-link" href="sehrim.html">Şehrim</a>
-                <a class="nav-link" href="ilgialanlarım.html">İlgi Alanlarım</a>
-                <a class="nav-link" href="#">İletişim</a>
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="ilgialanlarim.html">İlgi Alanlarım</a>
+                <a class="nav-link" href="iletisim.html">İletişim</a>
+                <a class="nav-link" href="login.html">Login</a>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <main class="container mt-5">
-        <section>
-            <h2>Hakkında</h2>
-            <p>Bu benim ilk web projem. Burada hobilerim ve etkinliklerim yer alacak.</p>
+   <main class="container mt-5">
+        <section class="row align-items-center">
+            <div class="col-md-6">
+                <h2 class="display-5">Merhaba, Ben Berat Kuran</h2>
+                <p class="lead">Sakarya Üniversitesi Bilgisayar Mühendisliği öğrencisiyim.</p>
+                <p>Bu web sitesi, Web Teknolojileri dersi kapsamında hazırladığım proje ödevidir. Sitede hakkımdaki bilgilere, ilgi alanlarıma ve yaşadığım şehre dair detaylara ulaşabilirsiniz.</p>
+            </div>
+            <div class="col-md-6">
+                <img src="https://picsum.photos/id/160/500/300" class="img-fluid rounded shadow" alt="Profil">
+            </div>
+        </section>
+
+        <section class="mt-5 border-top pt-4">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="p-3 border rounded bg-white shadow-sm mb-3">
+                        <h4>Eğitim</h4>
+                        <p>SAÜ Bilgisayar Mühendisliği</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border rounded bg-white shadow-sm mb-3">
+                        <h4>Teknolojiler</h4>
+                        <p>HTML, CSS, JS, Vue.js, PHP</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 border rounded bg-white shadow-sm mb-3">
+                        <h4>Hedef</h4>
+                        <p>Full-Stack Yazılım Geliştirme</p>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-
-    <footer class="text-center p-4 mt-5 border-top">
-        <p>&copy; 2026 - Tüm Hakları Saklıdır.</p>
-    </footer>
-
     <!-- Bootstrap JS Bağlantısı -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
